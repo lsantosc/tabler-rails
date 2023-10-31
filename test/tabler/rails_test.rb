@@ -1,7 +1,11 @@
-require "test_helper"
+# frozen_string_literal: true
 
-class Tabler::RailsTest < ActiveSupport::TestCase
-  test "it has a version number" do
-    assert Tabler::Rails::VERSION
+require 'test_helper'
+
+module Tabler
+  class RailsTest < ActiveSupport::TestCase
+    test 'it has a version number' do
+      assert Tabler::Rails::VERSION
+    end
   end
 end

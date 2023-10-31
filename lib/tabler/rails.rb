@@ -1,8 +1,7 @@
-require "tabler/rails/version"
-require "tabler/rails/engine"
-
-module Tabler
-  module Rails
-    # Your code goes here...
-  end
-end
+# frozen_string_literal: true
+#
+# require 'tabler/version'
+# require 'tabler/engine'
+#
+# module Tabler
+# end
