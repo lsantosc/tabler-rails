@@ -5,7 +5,7 @@ require 'test_helper'
 module Tabler
   class RailsTest < ActiveSupport::TestCase
     test 'it has a version number' do
-      assert Tabler::Rails::VERSION
+      assert Tabler::VERSION
     end
   end
 end
