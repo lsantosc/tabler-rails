@@ -59,7 +59,7 @@ module Tabler
     end
 
     def destination
-      Pathname(destination_root)
+      Pathname(Rails.root)
     end
 
     def using_custom_frontend?

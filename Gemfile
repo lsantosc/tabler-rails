@@ -12,6 +12,12 @@ gem 'sqlite3'
 
 gem 'sprockets-rails'
 
+# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+gem 'stimulus-rails'
+
+# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+gem 'turbo-rails'
+
 gem 'brakeman', '~> 6.0'
 gem 'bundler-audit', '~> 0.9.1'
 gem 'rubocop', '~> 1.57.2', '>= 1.57.2'

@@ -44,14 +44,34 @@ class InstallerGeneratorTest < Rails::Generators::TestCase
     Rails.root.join('yarn.lock')
   end
 
+  def application_js
+    Rails.root.join('app/javascript/application.js')
+  end
+
+  def application_css
+    Rails.root.join('app/assets/stylesheets/application.css')
+  end
+
   def start_test!
     cd Rails.root
     copy_file package_template, package_json
   end
 
-  def end_test!
+  def remove_packages!
     remove_file(package_json, true)
     remove_file(yarn_lock, true)
     remove_dir(Rails.root.join('node_modules'))
+  end
+
+  def return_with_templates!
+    remove_file(application_js)
+    copy_file(Rails.root.join('app/javascript/application_template.js'), application_js)
+    remove_file(application_css)
+    copy_file(Rails.root.join('app/assets/stylesheets/application_template.css'), application_css)
+  end
+
+  def end_test!
+    remove_packages!
+    return_with_templates!
   end
 end
