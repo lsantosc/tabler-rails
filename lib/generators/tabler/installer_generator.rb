@@ -6,7 +6,8 @@ module Tabler
   class InstallerGenerator < Rails::Generators::Base
     source_root File.expand_path('templates', __dir__)
     PACKAGES = %w[@tabler/core tom-select].freeze
-    JS_LINES = %(\nimport "@tabler/core/dist/js/tabler.esm"\nimport "tom-select/dist/js/tom-select.complete")
+    JS_LINES = %(\nimport "@tabler/core/dist/js/tabler.esm";\nimport "tom-select/dist/js/tom-select.complete";)
+    CSS_LINES = %(\n@import "@tabler/core/dist/css/tabler.css";\n@import "tom-select/dist/css/tom-select.css";\n)
 
     def ensure_node_version
       version = run 'node --version', capture: true
@@ -22,14 +23,28 @@ module Tabler
       run "yarn add #{PACKAGES.join(' ')}"
     end
 
-    def add_css_and_js_lines
+    def add_js_lines
       application_javascript_path = fetch_application_js_path
       create_file(application_javascript_path) unless application_javascript_path.exist?
       say "Inserting Javascript lines into #{application_javascript_path}", :green
-      insert_into_file application_javascript_path.to_s, JS_LINES, after: 'import "@hotwired/turbo-rails"'
+      insert_into_file application_javascript_path.to_s, JS_LINES, after: 'import "@hotwired/turbo-rails";'
+    end
+
+    def add_css_lines
+      application_css_path = fetch_application_css_path
+      say "Inserting CSS lines into #{application_css_path}", :green
+      append_to_file application_css_path, CSS_LINES
     end
 
     private
+
+    def fetch_application_css_path
+      if using_custom_frontend?
+        destination.join('app/frontend/stylesheets/application.css')
+      else
+        destination.join('app/assets/stylesheets/application.css')
+      end
+    end
 
     def fetch_application_js_path
       if using_custom_frontend?
