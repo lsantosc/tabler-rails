@@ -8,13 +8,15 @@ class InstallerGeneratorTest < Rails::Generators::TestCase
   destination Rails.root.join('tmp/generators')
   setup :prepare_destination
 
-  test 'Add yarn packages' do
-    cd Rails.root
-    create_package!
+  test 'Ensure node version' do
+    start_test!
+    assert_nothing_raised { run_generator }
+    end_test!
+  end
 
-    assert_nothing_raised do
-      run_generator ['tabler:installer']
-    end
+  test 'Add yarn packages' do
+    start_test!
+    run_generator
 
     assert_file package_json
     assert_file yarn_lock
@@ -25,7 +27,7 @@ class InstallerGeneratorTest < Rails::Generators::TestCase
       assert_includes package_content['dependencies'].keys, package
     end
 
-    clean_files!
+    end_test!
   end
 
   private
@@ -42,11 +44,12 @@ class InstallerGeneratorTest < Rails::Generators::TestCase
     Rails.root.join('yarn.lock')
   end
 
-  def create_package!
+  def start_test!
+    cd Rails.root
     copy_file package_template, package_json
   end
 
-  def clean_files!
+  def end_test!
     remove_file(package_json, true)
     remove_file(yarn_lock, true)
     remove_dir(Rails.root.join('node_modules'))
