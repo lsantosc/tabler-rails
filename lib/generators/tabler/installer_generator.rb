@@ -3,6 +3,7 @@
 module Tabler
   ##
   # This generator will gonna install tabler needed packages
+  # and insert js and css needed lines automatically
   class InstallerGenerator < Rails::Generators::Base
     source_root File.expand_path('templates', __dir__)
     PACKAGES = %w[@tabler/core tom-select].freeze
