@@ -68,13 +68,5 @@ module Tabler
     def using_javascript_folder?
       destination.join('app/javascript').exist?
     end
-
-    def frontend_folder_instructions
-      <<INSTRUCTIONS
-        [1] - app/assets/[javascripts,stylesheets]
-        [2] - app/frontend/[javascripts,stylesheets]
-        [3] - app/javascripts and app/assets/stylesheets
-INSTRUCTIONS
-    end
   end
 end
