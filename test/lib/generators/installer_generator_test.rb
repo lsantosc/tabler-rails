@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 require 'test_helper'
-require 'generators/installer/installer_generator'
+require 'generators/tabler/installer_generator'
 
 class InstallerGeneratorTest < Rails::Generators::TestCase
-  tests InstallerGenerator
+  tests Tabler::InstallerGenerator
   destination Rails.root.join('tmp/generators')
   setup :prepare_destination
 
@@ -13,7 +13,7 @@ class InstallerGeneratorTest < Rails::Generators::TestCase
     create_package!
 
     assert_nothing_raised do
-      run_generator ['installer']
+      run_generator ['tabler:installer']
     end
 
     assert_file package_json
@@ -21,7 +21,7 @@ class InstallerGeneratorTest < Rails::Generators::TestCase
 
     package_content = JSON.parse(package_json.read)
 
-    InstallerGenerator::PACKAGES.each do |package|
+    Tabler::InstallerGenerator::PACKAGES.each do |package|
       assert_includes package_content['dependencies'].keys, package
     end
 
