@@ -9,9 +9,10 @@ require 'rails/test_help'
 
 # Load fixtures from the engine
 if ActiveSupport::TestCase.respond_to?(:fixture_path=)
-  ActiveSupport::TestCase.fixture_path = File.expand_path('fixtures', __dir__)
-  ActionDispatch::IntegrationTest.fixture_path = ActiveSupport::TestCase.fixture_path
-  ActiveSupport::TestCase.file_fixture_path = "#{ActiveSupport::TestCase.fixture_path}/files"
+  fixture_test_path = File.expand_path('fixtures', __dir__)
+  ActiveSupport::TestCase.fixture_paths << fixture_test_path
+  ActionDispatch::IntegrationTest.fixture_paths << fixture_test_path
+  ActiveSupport::TestCase.file_fixture_path = "#{fixture_test_path}/files"
   ActiveSupport::TestCase.fixtures :all
 end
 

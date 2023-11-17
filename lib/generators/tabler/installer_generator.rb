@@ -10,13 +10,16 @@ module Tabler
     JS_LINES = %(\nimport "@tabler/core/dist/js/tabler.esm";\nimport "tom-select/dist/js/tom-select.complete";)
     CSS_LINES = %(\n@import "@tabler/core/dist/css/tabler.css";\n@import "tom-select/dist/css/tom-select.css";\n)
 
+    class WrongNodeVersion < Rails::Generators::Error; end
+
     def ensure_node_version
       version = run 'node --version', capture: true
       major_version = version.split('.').first.gsub(/\D/, '').to_i
       return say "Great! You node version is #{version}", :green if major_version >= 18
 
-      say_error('Node version needs to be >=18', :red)
-      exit!
+      error_message = 'Node version needs to be >=18'
+      say_error(error_message, :red)
+      throw Rails::Generators::Error(error_message)
     end
 
     def add_yarn_packages

@@ -1,0 +1,7 @@
+{
+  "name": "dummy",
+  "private": true,
+  "engines": {
+    "node": ">=17.5.0 <18"
+  }
+}

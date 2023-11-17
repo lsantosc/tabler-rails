@@ -5,6 +5,10 @@ module DummyTestHelpers
     Rails.root.join('package_template.json')
   end
 
+  def wrong_package_template
+    Rails.root.join('package_wrong.json')
+  end
+
   def package_json
     Rails.root.join('package.json')
   end

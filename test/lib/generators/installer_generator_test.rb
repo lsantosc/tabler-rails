@@ -14,7 +14,19 @@ class InstallerGeneratorTest < Rails::Generators::TestCase
   test 'Ensure node version' do
     start_test!
     assert_nothing_raised { run_generator }
+    assert_file yarn_lock
     end_test!
+  end
+
+  test 'Do not start with wrong node version' do
+    cd Rails.root
+    copy_file wrong_package_template, package_json
+
+    run_generator
+
+    assert_no_file yarn_lock
+
+    remove_file(package_json, true)
   end
 
   test 'Add yarn packages' do
