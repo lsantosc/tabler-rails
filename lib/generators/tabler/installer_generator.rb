@@ -9,6 +9,8 @@ module Tabler
     PACKAGES = %w[@tabler/core tom-select].freeze
     JS_LINES = %(\nimport "@tabler/core/dist/js/tabler.esm";\nimport "tom-select/dist/js/tom-select.complete";)
     CSS_LINES = %(\n@import "@tabler/core/dist/css/tabler.css";\n@import "tom-select/dist/css/tom-select.css";\n)
+    TEMPLATES = %w[application.html.erb tight.html.erb]
+
 
     class WrongNodeVersion < Rails::Generators::Error; end
 
@@ -38,6 +40,12 @@ module Tabler
       application_css_path = fetch_application_css_path
       say "Inserting CSS lines into #{application_css_path}", :green
       append_to_file application_css_path, CSS_LINES
+    end
+
+    def generate_application_layout
+      TEMPLATES.each do |template|
+        template template, "app/views/layouts/#{template}", force: true
+      end
     end
 
     private

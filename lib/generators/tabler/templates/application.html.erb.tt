@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%%= title(default_title: 'Tabler') %>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%%= csrf_meta_tags %>
+  <%%= csp_meta_tag %>
+
+  <%%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  <%%= yield :javascripts %>
+</head>
+<body class="layout-fluid theme-light">
+<div class="page">
+  <div class="page-wrapper">
+    <%%= yield %>
+  </div>
+</div>
+<turbo-frame id="modal-show" target="_top"></turbo-frame>
+</body>
+</html>

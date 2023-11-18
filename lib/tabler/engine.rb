@@ -2,5 +2,6 @@
 
 module Tabler
   class Engine < ::Rails::Engine
+    isolate_namespace Tabler
   end
 end
