@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 module DummyTestHelpers
+  def application_template
+    Rails.root.join('app/views/layouts/application.html.erb')
+  end
+
   def package_template
     Rails.root.join('package_template.json')
   end

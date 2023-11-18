@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%%= title(default_title: 'Tabler' %>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%%= csrf_meta_tags %>
+  <%%= csp_meta_tag %>
+
+  <%%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
+  <%%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  <%%= yield :javascripts %>
+</head>
+<body class="border-top-wide border-primary d-flex flex-column">
+  <div class="page page-center">
+    <div class="container-tight py-4">
+      <div class="text-center mb-4">
+        <%%= link_to('Tabler', '/', class: 'navbar-brand') %>
+      </div>
+      <%%= yield %>
+    </div>
+  </div>
+</body>
+</html>
